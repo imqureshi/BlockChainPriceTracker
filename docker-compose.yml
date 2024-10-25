@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - '3003:3000'
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - app-network
+  #   restart: always
+
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: chain#12
+      POSTGRES_DB: blockchainPriceTracker
+    ports:
+      - '5732:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+volumes:
+  pgdata:
+
+networks:
+  app-network:
+    driver: bridge
